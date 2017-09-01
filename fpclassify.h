@@ -38,6 +38,7 @@ extern double DOUBLE_ZERO;
 #if !defined(isnan) || !defined(isinf) || !defined(isfinite)
 #define NEED_fpclassify
 extern int fpclassify(double d);
+extern int signbit(double d);
 #define FP_INFINITE (1)
 #define FP_NAN (2)
 #define FP_ZERO (4)
@@ -46,6 +47,7 @@ extern int fpclassify(double d);
 #define isnan(x) ((fpclassify((double)(x)) & FP_NAN) == FP_NAN)
 #define isinf(x) ((fpclassify((double)(x)) & FP_INFINITE) == FP_INFINITE)
 #define isfinite(x) ((fpclassify((double)(x)) & (FP_NAN|FP_INFINITE)) == 0)
+#define isnormal(x) ((fpclassify((double)(x)) & FP_NORMAL) == FP_NORMAL)
 #endif
 
 #endif /* FPCLASSIFY_H */

@@ -28,6 +28,7 @@
 
 double DOUBLE_ZERO = 0.0;
 
+
 #if defined(NEED_fpclassify)
 
 #if defined(HAVE_STDINT_H)
@@ -39,9 +40,11 @@ typedef unsigned __int64 bitfield64;
 typedef unsigned long long bitfield64;
 #endif
 
+
 static bitfield64 ms = 0x8000000000000000;
 static bitfield64 me = 0x7FF0000000000000;
 static bitfield64 mf = 0x000FFFFFFFFFFFFF;
+
 
 int fpclassify(double d) 
 {
@@ -61,6 +64,13 @@ int fpclassify(double d)
     return FP_NAN;
   }
   return FP_INFINITE;
+}
+
+
+int signbit(double d)
+{
+  bitfield64 *p = (bitfield64 *)&d;
+  return ((*p & ms) != 0);
 }
 
 #endif
